@@ -16,7 +16,27 @@ st.set_page_config(
     layout="wide",
 )
 
+model_options = {
+    "Logistic Regression": "logistic",
+    "Decision Tree": "decision_tree",
+    "KNN": "knn",
+    "Naive Bayes": "naive_bayes",
+    "Random Forest": "random_forest",
+}
+
+with st.sidebar:
+    st.header("Configuration")
+    uploaded_file = st.file_uploader("Upload test CSV", type=["csv"])
+    selected_model_name = st.selectbox("Select model", list(model_options.keys()))
+
 st.title("🏦 Bank Marketing Model Evaluator")
+
+with st.container():
+    st.markdown(
+        f"<h3 style='color:#1f77b4; font-weight:700; margin-bottom:0.2rem;'>Selected Model: {selected_model_name}</h3>",
+        unsafe_allow_html=True,
+    )
+
 st.write(
     "Upload a test CSV file to evaluate a trained bank marketing classifier."
 )
@@ -55,19 +75,6 @@ def prepare_features(df, expected_columns):
 
     return df[expected_columns]
 
-
-model_options = {
-    "Logistic Regression": "logistic",
-    "Decision Tree": "decision_tree",
-    "KNN": "knn",
-    "Naive Bayes": "naive_bayes",
-    "Random Forest": "random_forest",
-}
-
-with st.sidebar:
-    st.header("Configuration")
-    uploaded_file = st.file_uploader("Upload test CSV", type=["csv"])
-    selected_model_name = st.selectbox("Select model", list(model_options.keys()))
 
 if uploaded_file is not None:
     try:
