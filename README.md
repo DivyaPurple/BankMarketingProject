@@ -8,7 +8,7 @@
 
 Marketing campaigns often involve contacting thousands of customers, making it important to identify those who are most likely to subscribe to a term deposit. The **BankMarketingProject** addresses this challenge by leveraging customer information and campaign-related attributes to predict the likelihood of a successful subscription.
 
-Multiple machine learning classification models are developed, evaluated, and compared to determine the best-performing approach. The final solution is presented through an interactive Streamlit web application that enables users to explore model predictions and performance.
+Multiple machine learning classification models are developed, evaluated, and compared to determine the best-performing approach. The final solution is presented through an interactive Streamlit web application that enables users to explore model predictions and performance...
 
 ---
 
@@ -60,7 +60,7 @@ The dataset contains **16 input features** describing customer demographics, fin
 
 > **Repository Link**
 
-**👉 **
+**👉 [View the GitHub Repository](https://github.com/DivyaPurple/BankMarketingProject)**
 
 ---
 
@@ -114,4 +114,4 @@ The dataset contains **16 input features** describing customer demographics, fin
 
 > **Live Application Link**
 
-**👉 **
+**👉 https://bankmarketingprojectml.streamlit.app/**
