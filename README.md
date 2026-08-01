@@ -114,4 +114,4 @@ The dataset contains **16 input features** describing customer demographics, fin
 
 > **Live Application Link**
 
-**👉 https://bankmarketingprojectml.streamlit.app/**
+**👉 https://bankmarketingprojectml1.streamlit.app/**
