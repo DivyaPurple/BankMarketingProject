@@ -8,6 +8,8 @@ from sklearn.metrics import (
     f1_score,
     precision_score,
     recall_score,
+    roc_auc_score,
+    matthews_corrcoef,
 )
 
 st.set_page_config(
@@ -47,7 +49,7 @@ st.caption(
 
 @st.cache_data
 def load_default_data():
-    X_test = pd.read_csv("data/X_test_encoded.csv")
+    X_test = pd.read_csv("data/X_test_scaled.csv")
     y_test = pd.read_csv("data/y_test_encoded.csv").iloc[:, 0]
     return X_test, y_test
 
@@ -119,11 +121,14 @@ else:
 model_key = model_options[selected_model_name]
 model = load_model(model_key)
 predictions = model.predict(X_eval)
+y_proba = model.predict_proba(X_eval)[:, 1]
 
 accuracy = accuracy_score(y_true, predictions)
 precision = precision_score(y_true, predictions, zero_division=0)
 recall = recall_score(y_true, predictions, zero_division=0)
 f1 = f1_score(y_true, predictions, zero_division=0)
+auc = roc_auc_score(y_true, y_proba)
+mcc = matthews_corrcoef(y_true, predictions)
 cm = confusion_matrix(y_true, predictions)
 classification_rep = classification_report(
     y_true,
@@ -140,11 +145,13 @@ st.info(
     f"Model: {selected_model_name} | Data source: {source_label} | Rows evaluated: {len(X_eval)}"
 )
 
-col1, col2, col3, col4 = st.columns(4)
-col1.metric("Accuracy", f"{accuracy:.3f}")
-col2.metric("Precision", f"{precision:.3f}")
-col3.metric("Recall", f"{recall:.3f}")
-col4.metric("F1 Score", f"{f1:.3f}")
+col1, col2, col3, col4, col5, col6 = st.columns(6)
+col1.metric("Accuracy", f"{accuracy:.4f}")
+col2.metric("AUC", f"{auc:.4f}")
+col3.metric("Precision", f"{precision:.4f}")
+col4.metric("Recall", f"{recall:.4f}")
+col5.metric("F1 Score", f"{f1:.4f}")
+col6.metric("MCC", f"{mcc:.4f}")
 
 st.subheader("Confusion Matrix")
 st.dataframe(
