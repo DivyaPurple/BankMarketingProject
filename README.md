@@ -20,7 +20,7 @@ Multiple machine learning classification models are developed, evaluated, and co
 | **Dataset Name** | Bank Marketing Dataset |
 | **Source** | Kaggle |
 | **Dataset Type** | Binary Classification |
-| **Target Variable** | `y` (Term Deposit Subscription) |
+| **Target Variable** | `deposit` (Term Deposit Subscription) |
 | **Total Records** | 45,211 |
 | **Input Features** | 16 |
 | **Target Classes** | Yes / No |
