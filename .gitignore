@@ -20,3 +20,6 @@ __pycache__/
 
 # Environment variables
 .env
+
+# Trained Models
+models/*.pkl

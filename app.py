@@ -83,7 +83,22 @@ if uploaded_file is not None:
         expected_columns = default_X.columns.tolist()
 
         if "deposit" in uploaded_df.columns:
-            y_true = uploaded_df["deposit"].astype(int)
+            target = uploaded_df["deposit"]
+
+            if pd.api.types.is_numeric_dtype(target):
+                y_true = pd.to_numeric(target, errors="raise").astype(int)
+                if set(y_true.unique()) - {0, 1}:
+                    raise ValueError("deposit column must contain only yes/no or 0/1 values")
+            else:
+                y_true = (
+                    target.astype(str)
+                    .str.strip()
+                    .str.lower()
+                    .map({"no": 0, "yes": 1, "0": 0, "1": 1})
+                )
+                if y_true.isna().any():
+                    raise ValueError("deposit column must contain only yes/no or 0/1 values")
+
             X_eval = uploaded_df.drop(columns=["deposit"])
             source_label = uploaded_file.name
         else:
